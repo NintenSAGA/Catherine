@@ -2,12 +2,12 @@
 // Created by NintenSAGA on 2020/12/11.
 //
 
-#include "Global.h"
+#include "include/Global.h"
 
-int game (int map_original[][12], int x, int y){
+int game (const int map_original[][12], int x, int y){
 
 
-    int m, n, temp, temp2;
+    int m, n, temp2;
     int restart_signal = 0;
     int exit_signal = 0;
     int map[y][12];

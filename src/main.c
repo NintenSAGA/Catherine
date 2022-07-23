@@ -1,5 +1,5 @@
-#include "Global.h"
-#include "map_data.h"
+#include "include/Global.h"
+#include "include/map_data.h"
 int level = 0;
 int items = 0;
 int steps = 0;

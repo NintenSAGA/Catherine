@@ -1,7 +1,7 @@
 //
 // Created by NintenSAGA on 2020/12/11.
 //
-#include "Global.h"
+#include "include/Global.h"
 
 void make_blank(int num){
     int i;
@@ -9,12 +9,11 @@ void make_blank(int num){
 }
 
 void print_map(int map[][12], int x, int y){
-
     int blank = (50-x)/2 + 1;
     int line = (50-y-6+1)/2;
     int i, m, n, temp;
 
-    for(i = 0;i < line;i++) printf("\n");
+   for(i = 0;i < line;i++) printf("\n");
 
     printf("┌");
     for(i = 0;i < 48;i++) printf("─");
@@ -67,6 +66,6 @@ void print_map(int map[][12], int x, int y){
     for(i = 0;i < 48;i++) printf("─");
     printf("┘\n");
 
-    for(i = 0;i < ((50-y-6+1) - line);i++) printf("\n");
+   for(i = 0;i < ((50-y-6+1) - line);i++) printf("\n");
 
 }
