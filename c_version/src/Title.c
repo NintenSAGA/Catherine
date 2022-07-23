@@ -2,7 +2,7 @@
 // Created by NintenSAGA on 2020/12/11.
 //
 
-#include "include/Global.h"
+#include "Global.h"
 
 void title(){
     int i;
