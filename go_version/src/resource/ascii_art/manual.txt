@@ -1,0 +1,8 @@
+              Operation Manual
+
+   ○ Player            ■ Immovable Block
+   ◆ Target Block      ◇ Target Place
+   △ Magical Sand Clock
+
+*   By pressing 'I' to use item, you can   *
+*   reverse one block pushing movement.    *

@@ -2,23 +2,13 @@ package scene
 
 import (
   "github.com/gdamore/tcell/v2"
+  "path"
   "push_blocks/src/graphics"
+  "push_blocks/src/resource"
 )
 
-var title = []string{
-  "   _____      _   _               _            ",
-  "  / ____|    | | | |             (_)           ",
-  " | |     __ _| |_| |__   ___ _ __ _ _ __   ___ ",
-  " | |    / _` | __| '_ \\ / _ \\ '__| | '_ \\ / _ \\",
-  " | |___| (_| | |_| | | |  __/ |  | | | | |  __/",
-  "  \\_____\\__,_|\\__|_| |_|\\___|_|  |_|_| |_|\\___|",
-  "                                               ",
-  "            ©2002-2022 NINTENSAGA              ",
-  "                                               ",
-  "                                               ",
-  "                                               ",
-  "                                               ",
-}
+var figure = resource.ReadText(path.Join(resource.ASCIIArt, "background.txt"))
+var title = resource.ReadText(path.Join(resource.ASCIIArt, "title.txt"))
 
 var prompt1 = []string{
   "Press Enter to Start",
@@ -56,13 +46,19 @@ func (t *Title) Show() {
   t.drawSideBar()
 
   tH := len(title)
-  tW := len(title[0])
-  pW := len(prompt1[0])
+  tW := graphics.GetWidth(title)
+  pW := graphics.GetWidth(prompt1)
 
-  graphics.DrawTileCenterRelative(t.s, title, graphics.NormalStyle, false, -(tW / 2), -(tH / 2))
+  fH := len(figure)
+  fW := graphics.GetWidth(figure)
+
+  graphics.DrawTileCenterRelative(t.s, figure, graphics.NormalStyle, true, -(fW / 2), -(fH/2 + 2))
+  graphics.DrawTileCenterRelative(t.s, title, graphics.NormalStyle, true, -(tW / 2), -(tH/2 + 2))
+
   t.flashPrinter.Show(func() {
-    graphics.DrawTileCenterRelative(t.s, prompt1, graphics.NormalStyle, false, -(pW / 2), tH/2-2)
+    graphics.DrawTileCenterRelative(t.s, prompt1, graphics.NormalStyle, false, -(pW / 2), tH/2)
   })
+
 }
 
 func (t *Title) IsFinished() bool {

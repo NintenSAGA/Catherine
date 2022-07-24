@@ -3,6 +3,7 @@ package graphics
 import (
   "github.com/gdamore/tcell/v2"
   "golang.org/x/sys/unix"
+  "math"
   "syscall"
 )
 
@@ -16,6 +17,16 @@ func GetTerminalInfo() (row uint16, col uint16) {
   }
 
   return
+}
+
+func GetWidth(texts []string) int {
+  width := math.MinInt
+  for _, row := range texts {
+    if w := len([]rune(row)); w > width {
+      width = w
+    }
+  }
+  return width
 }
 
 func DrawBackGround(s tcell.Screen, pattern [3][3]rune, style tcell.Style) {
@@ -66,11 +77,12 @@ func DrawTileCenterRelative(s tcell.Screen, content []string, style tcell.Style,
   cOffsetX += offsetX
   cOffsetY += offsetY
 
-  DrawTile(s, content, style, cOffsetX, cOffsetY, alpha)
+  DrawTile(s, content, style, alpha, cOffsetX, cOffsetY)
 }
 
-func DrawTile(s tcell.Screen, content []string, style tcell.Style, offsetX int, offsetY int, alpha bool) {
+func DrawTile(s tcell.Screen, content []string, style tcell.Style, alpha bool, offsetX int, offsetY int) {
   for y, row := range content {
+    row := []rune(row)
     for x, r := range row {
       if alpha && r == ' ' {
         continue

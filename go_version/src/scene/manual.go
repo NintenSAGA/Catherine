@@ -2,32 +2,17 @@ package scene
 
 import (
   "github.com/gdamore/tcell/v2"
+  "path"
   "push_blocks/src/graphics"
+  "push_blocks/src/resource"
 )
 
-var texts = [][]string{
-  {
-    "Your name is Vincent.                           ",
-    "",
-    "Because of your getting too close with a girl   ",
-    "called Catherine, you're cursed by your fiancee ",
-    "Katherine.",
-    "",
-    "During a nightmare, you're stuck in a dungeon.  ",
-    "",
-    "To avoid being killed, you have to push all the ",
-    "blocks to the correct places.                   ",
-  },
-  {
-    "              Operation Manual              ",
-    "                                            ",
-    "   ○ You               ■ Unmovable Blocks   ",
-    "   ◆ Object Blocks     ◇ Object Places      ",
-    "   △ Magical Sand Clocks                    ",
-    "                                            ",
-    "*You can turn back time by entering 'I' when",
-    " holding a Magical Sand Clock*              ",
-  },
+var intro = resource.ReadText(path.Join(resource.ASCIIArt, "introduction.txt"))
+var manual = resource.ReadText(path.Join(resource.ASCIIArt, "manual.txt"))
+
+var manualTexts = [][]string{
+  intro,
+  manual,
 }
 
 var prompt2 = []string{
@@ -61,17 +46,17 @@ func (m *Manual) Show() {
 
   graphics.DrawBackGround(m.s, graphics.NormalPattern, graphics.NormalStyle)
 
-  text := texts[m.phase]
-  tH, tW := len(text), len(text[0])
+  text := manualTexts[m.phase]
+  tH, tW := len(text), graphics.GetWidth(text)
   graphics.DrawTileCenterRelative(m.s, text, graphics.NormalStyle, false,
     -(tW / 2), -(tH/2 + 2))
 
   m.flashPrinter.Show(func() {
     graphics.DrawTileCenterRelative(m.s, prompt2, graphics.NormalStyle, false,
-      -(len(prompt2[0]) / 2), tH/2)
+      -(len(prompt2[0]) / 2), tH/2+2)
   })
 }
 
 func (m *Manual) IsFinished() bool {
-  return m.phase >= len(texts)
+  return m.phase >= len(manualTexts)
 }
