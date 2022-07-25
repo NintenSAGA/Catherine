@@ -1,5 +1,5 @@
 
-NAME		:= PushBlock
+NAME		:= Catherine
 
 GO			:= go
 MAIN		:= src/main.go
@@ -10,7 +10,22 @@ BIN_DIR 	:= bin
 .DEFAULT_GOAL := all
 
 all: $(MAIN)
-	$(GO) build -o $(BIN_DIR)/$(NAME) $(MAIN)
+	$(GO) build -o $(BIN_DIR)/$(NAME)  $(MAIN)
+
+build-docker: $(MAIN)
+	docker run --rm -v "$(PWD)":/usr/src/myapp -w /usr/src/myapp golang:1.18\
+	 bash -c '\
+	 	for GOOS in darwin linux; do\
+	 		for GOARCH in amd64; do\
+	 			export GOOS GOARCH; \
+				$(GO) build -o $(BIN_DIR)/$(NAME)-$$GOOS-$$GOARCH $(MAIN); \
+			done \
+		done \
+	 '
+
+testBash:
+	bash -c "for GOOS in darwin linux windows; do \
+		echo GOOS; done"
 
 run: all
 	make run_only
