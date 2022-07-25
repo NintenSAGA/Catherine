@@ -11,8 +11,8 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
-      - name: Checkout the repository
-        uses: actions/checkout@v2
+      - name: go-cross-build
+        uses: thatisuday/go-cross-build@v1.1.0
         with:
           platforms: 'linux/amd64, darwin/amd64'
           package: 'go_version'
