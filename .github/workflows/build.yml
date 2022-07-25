@@ -12,5 +12,4 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v2
       - run: |
-          cd ./go-version
-          make build-docker
+          ls
