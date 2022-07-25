@@ -1,0 +1,16 @@
+name: Auto Release
+
+on:
+  workflow_dispatch:
+jobs:
+  build_and_release:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Go environment
+        uses: actions/setup-go@v3.2.1
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+      - name: build
+        working-directory: ./go_version
+        run: make build-docker
