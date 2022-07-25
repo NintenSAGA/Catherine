@@ -5,19 +5,19 @@
 ![Go](https://img.shields.io/badge/-Golang-087CFA?style=flat&logo=go&logoColor=white)
 ![Platform](https://img.shields.io/badge/Platform-macOS_|_Linux-white)
 
-A simple TUI block pushing game.
+A simple TUI block-pushing game.
 
 ## 1. Introduction 🤔
 
 This game was first written in C in my freshman year (2020).
 
-Recently, in order to backup my pre-github projects, I dug it out again. But besides puting the original one in my repo, I also decided to rewrite it in Go to get more familiar with the language.
+Recently, to back up my pre-GitHub projects, I dug it out again. But besides putting the original one in my repo, I also decided to rewrite it in Go to get more familiar with the language.
 
 ### Why Catherine? 
 
-Well, obviously it’s named after the game _Catherine_ (Atlus, 2011), and even the name of the hero and the background story are same as its. 
+Well, it’s named after the game *Catherine* (Atlus, 2011), and even the name of the hero and the background story of mine are the same as its. 
 
-This is mainly because _Catherine_ is the first game I can call to mind when thinking about block pushing game (though I wrote the game in plain TUI 2D).
+This is mainly because *Catherine* is the first game I can call to mind when thinking about a block-pushing game (though I wrote the game in plain TUI 2D).
 
 ## 2. Build & Run 🛠
 
