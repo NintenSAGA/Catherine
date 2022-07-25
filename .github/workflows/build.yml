@@ -11,5 +11,6 @@ jobs:
         uses: actions/setup-go@v3.2.1
       - name: Checkout the repository
         uses: actions/checkout@v2
-      - run: |
-          ls
+      - name: build
+        working-directory: ./go_version
+        run: make build-docker
