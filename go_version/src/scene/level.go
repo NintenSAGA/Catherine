@@ -31,7 +31,7 @@ var clearPrompt = resource.ReadText(path.Join(resource.ASCIIArt, "cleared.txt"))
 
 var symbolMap = map[string]rune{
   cellNone:   ' ',
-  cellPlayer: '○',
+  cellPlayer: 'O',
   cellBlock:  '◆',
   cellWall:   tcell.RuneBoard,
   cellDest:   '◇',
@@ -175,6 +175,8 @@ func (l *Level) mapRender() {
   sw, sh := l.s.Size()
   h, w := len(l.Data), len(l.Data[0])
   offsetX, offsetY := sw/2-w/2, sh/2-h/2
+
+  graphics.DrawBox(l.s, graphics.NormalPattern, graphics.NormalStyle, true, offsetX-1, offsetY-1, w+2, h+2)
 
   for _, targetInfo := range l.targetInfos {
     l.placeAt(offsetX+targetInfo.x, offsetY+targetInfo.y, cellDest)

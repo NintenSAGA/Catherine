@@ -3,6 +3,7 @@ package main
 import (
   "bytes"
   "encoding/csv"
+  "fmt"
   "github.com/gdamore/tcell/v2"
   "log"
   "path"
@@ -11,7 +12,10 @@ import (
   "runtime"
   "sort"
   "strings"
+  "time"
 )
+
+const Fps = 10
 
 func main() {
   /* 1. Launch */
@@ -59,12 +63,20 @@ func main() {
   // 3.3 Ending
   scenes = append(scenes, &scene.Ending{}, &scene.Thanks{})
 
+  duration, _ := time.ParseDuration(fmt.Sprintf("%vs", 1/Fps))
+  timer := time.NewTimer(duration)
+
   for _, eachScene := range scenes {
     eachScene.Init(s)
     for !eachScene.IsFinished() {
       eachScene.LogicUpdate()
-      eachScene.Show()
-      s.Show()
+      select {
+      case <-timer.C:
+        eachScene.Show()
+        s.Show()
+        timer.Reset(duration)
+      default:
+      }
     }
   }
 

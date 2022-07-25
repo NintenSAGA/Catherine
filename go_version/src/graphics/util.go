@@ -29,27 +29,32 @@ func GetWidth(texts []string) int {
   return width
 }
 
-func DrawBackGround(s tcell.Screen, pattern [3][3]rune, style tcell.Style) {
-  w, h := s.Size()
-
+func DrawBox(s tcell.Screen, pattern [3][3]rune, style tcell.Style, alpha bool, fromX int, fromY int, w int, h int) {
   // 1. Corners
-  s.SetContent(0, 0, pattern[0][0], nil, style)
-  s.SetContent(w-1, 0, pattern[0][2], nil, style)
-  s.SetContent(0, h-1, pattern[2][0], nil, style)
-  s.SetContent(w-1, h-1, pattern[2][2], nil, style)
+  s.SetContent(fromX+0, fromY+0, pattern[0][0], nil, style)
+  s.SetContent(fromX+w-1, fromY+0, pattern[0][2], nil, style)
+  s.SetContent(fromX+0, fromY+h-1, pattern[2][0], nil, style)
+  s.SetContent(fromX+w-1, fromY+h-1, pattern[2][2], nil, style)
 
   // 2. Borders
-  DrawLine(s, pattern[0][1], style, 1, 0, w-2, 0)
-  DrawLine(s, pattern[2][1], style, 1, h-1, w-2, h-1)
-  DrawLine(s, pattern[1][0], style, 0, 1, 0, h-2)
-  DrawLine(s, pattern[1][2], style, w-1, 1, w-1, h-2)
+  DrawLine(s, pattern[0][1], style, fromX+1, fromY+0, fromX+w-2, fromY+0)
+  DrawLine(s, pattern[2][1], style, fromX+1, fromY+h-1, fromX+w-2, fromY+h-1)
+  DrawLine(s, pattern[1][0], style, fromX+0, fromY+1, fromX+0, fromY+h-2)
+  DrawLine(s, pattern[1][2], style, fromX+w-1, fromY+1, fromX+w-1, fromY+h-2)
 
   // 3. Content
-  for x := 1; x < w-1; x++ {
-    for y := 1; y < h-1; y++ {
-      s.SetContent(x, y, pattern[1][1], nil, style)
+  if cell := pattern[1][1]; !alpha || cell != ' ' {
+    for x := 1; x < w-1; x++ {
+      for y := 1; y < h-1; y++ {
+        s.SetContent(fromX+x, fromY+y, cell, nil, style)
+      }
     }
   }
+}
+
+func DrawBackGround(s tcell.Screen, pattern [3][3]rune, style tcell.Style) {
+  w, h := s.Size()
+  DrawBox(s, pattern, style, false, 0, 0, w, h)
 }
 
 func DrawLine(s tcell.Screen, r rune, style tcell.Style, fromX int, fromY int, toX int, toY int) {

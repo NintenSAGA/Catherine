@@ -1,6 +1,6 @@
-              Operation Manual
+                   Legend
 
-   ○ Player            ■ Immovable Block
+   O Player            ■ Immovable Block
    ◆ Target Block      ◇ Target Place
    △ Magical Sand Clock
 
