@@ -23,10 +23,6 @@ build-docker: $(MAIN)
 		done \
 	 '
 
-testBash:
-	bash -c "for GOOS in darwin linux windows; do \
-		echo GOOS; done"
-
 run: all
 	make run_only
 
