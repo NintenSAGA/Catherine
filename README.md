@@ -23,6 +23,8 @@ This is mainly because *Catherine* is the first game I can call to mind when thi
 
 The build scripts of both versions are written in Makefile.
 
+The game only supports macOS and Linux and should be run in a terminal.
+
 ### [Root](.)
 
 | Target   | Description        |
