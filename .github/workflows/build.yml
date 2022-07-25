@@ -1,0 +1,21 @@
+name: Auto Release
+
+on:
+  release:
+    types:
+      - created
+jobs:
+  build_and_release:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+        with:
+          platforms: 'linux/amd64, darwin/amd64'
+          package: 'go_version'
+          name: 'Catherine'
+          compress: false
+          dest: 'go_version/release'
