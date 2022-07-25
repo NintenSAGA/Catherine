@@ -1,9 +1,7 @@
 name: Auto Release
 
 on:
-  release:
-    types:
-      - created
+  workflow_dispatch:
 jobs:
   build_and_release:
     name: Build and Release
@@ -11,11 +9,8 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v2
-      - name: go-cross-build
-        uses: thatisuday/go-cross-build@v1.1.0
-        with:
-          platforms: 'linux/amd64, darwin/amd64'
-          package: 'go_version'
-          name: 'Catherine'
-          compress: false
-          dest: 'go_version/release'
+      - name: Setup Go environment
+        uses: actions/setup-go@v3.2.1
+      - run: |
+          cd ./go-version
+          make build-docker
